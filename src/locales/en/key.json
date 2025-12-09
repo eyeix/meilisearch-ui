@@ -19,8 +19,9 @@
 			"placeholder": "add optional description for your key"
 		},
 		"indexes": {
-			"placeholder": "select permitted indexes",
-			"tip": "Leave this option empty means all indexes permitted"
+			"placeholder": "select or type index (e.g., movies_* or *)",
+			"tip": "Select existing indexes or type custom patterns (e.g., movies_* or *). Leave empty for all indexes.",
+			"wildcardAll": "all indexes"
 		},
 		"actions": {
 			"placeholder": "select permitted actions",

@@ -2,7 +2,7 @@
 import { useIndexes } from "@/hooks/useIndexes";
 import { useMeiliClient } from "@/hooks/useMeiliClient";
 import { cn } from "@/lib/cn";
-import { DatePicker, Input, Select } from "@douyinfe/semi-ui";
+import { AutoComplete, DatePicker, Input, Select, Tag } from "@douyinfe/semi-ui";
 import { Button, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import _ from "lodash";
@@ -32,8 +32,8 @@ export const KeyForm: FC<Props> = ({
 	const [formType] = useState<"create" | "edit">(type);
 	const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 	const [editing] = useState(data);
-	// list as many as possible
 	const [indexes] = useIndexes(client, { limit: 10000 });
+	const [indexInput, setIndexInput] = useState("");
 
 	const form = useForm<KeyFormValue>({
 		defaultValues: type === "edit" ? editing : {},
@@ -135,28 +135,65 @@ export const KeyForm: FC<Props> = ({
 					control={form.control}
 					name="indexes"
 					rules={{
-						required: true,
+						required: false,
 					}}
-					render={({ field }) => (
-						<label>
-							{t("props.indexes")}
-							<Select
-								disabled={formType === "edit"}
-								className="w-full"
-								multiple
-								defaultValue={[]}
-								value={field.value}
-								onChange={(arr) => field.onChange(arr)}
-								placeholder={t("form.indexes.placeholder")}
-							>
-								{indexes.map((index) => (
-									<Select.Option value={index.uid} key={index.uid}>
-										{index.uid}
-									</Select.Option>
-								))}
-							</Select>
-						</label>
-					)}
+					render={({ field }) => {
+						const selectedIndexes = field.value || [];
+						const availableOptions = [
+							{ value: "*", label: `* (${t("form.indexes.wildcardAll")})` },
+							...indexes
+								.filter((idx) => !selectedIndexes.includes(idx.uid))
+								.map((idx) => ({ value: idx.uid, label: idx.uid })),
+						].filter((opt) => !selectedIndexes.includes(opt.value));
+
+						const handleSelect = (value: string) => {
+							if (value && !selectedIndexes.includes(value)) {
+								field.onChange([...selectedIndexes, value]);
+							}
+							// Use setTimeout to ensure input is cleared after AutoComplete's internal update
+							setTimeout(() => setIndexInput(""), 0);
+						};
+
+						const handleRemove = (indexToRemove: string) => {
+							field.onChange(selectedIndexes.filter((i: string) => i !== indexToRemove));
+						};
+
+						const handleKeyDown = (e: React.KeyboardEvent) => {
+							if (e.key === "Enter" && indexInput.trim()) {
+								e.preventDefault();
+								handleSelect(indexInput.trim());
+							}
+						};
+
+						return (
+							<label>
+								{t("props.indexes")}
+								<div className="flex flex-col items-start gap-1 w-full">
+									{selectedIndexes.map((idx: string) => (
+										<Tag
+											key={idx}
+											closable={formType !== "edit"}
+											onClose={() => handleRemove(idx)}
+											color="light-blue"
+										>
+											{idx}
+										</Tag>
+									))}
+									<AutoComplete
+										disabled={formType === "edit"}
+										className="w-full"
+										data={availableOptions}
+										value={indexInput}
+										onChange={(v) => setIndexInput(String(v))}
+										onSelect={(v) => handleSelect(String(v))}
+										onKeyDown={handleKeyDown}
+										placeholder={t("form.indexes.placeholder")}
+										showClear={false}
+									/>
+								</div>
+							</label>
+						);
+					}}
 				/>
 			</Tooltip>
 			<Tooltip placement={"bottom-start"} content={t("form.actions.tip")}>
@@ -164,7 +201,7 @@ export const KeyForm: FC<Props> = ({
 					control={form.control}
 					name="actions"
 					rules={{
-						required: true,
+						required: false,
 					}}
 					render={({ field }) => (
 						<label>

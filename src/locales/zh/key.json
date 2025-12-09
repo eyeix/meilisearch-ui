@@ -19,8 +19,9 @@
 			"placeholder": "添加可选的密钥描述"
 		},
 		"indexes": {
-			"placeholder": "选择允许的索引",
-			"tip": "保留此选项为空表示允许所有索引"
+			"placeholder": "选择或输入索引（如 movies_* 或 *）",
+			"tip": "选择现有索引或输入自定义模式（如 movies_* 或 *）。留空表示所有索引。",
+			"wildcardAll": "所有索引"
 		},
 		"actions": {
 			"placeholder": "选择允许的行为",
