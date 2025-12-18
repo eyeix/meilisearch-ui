@@ -27,9 +27,22 @@ export default defineConfig(({ mode }) => {
 	// Set the third parameter to "" to load all environment variables,
 	// regardless of whether they exist or not 'VITE_' prefix.
 	const env = loadEnv(mode, process.cwd(), "");
-	env.BASE_PATH && console.debug("Using custom base path:", env.BASE_PATH);
+	// Determine base path:
+	// - If BASE_PATH is set and not empty, use it directly (works for both dev and build)
+	// - In dev mode without BASE_PATH: use empty string (root path)
+	// - In build mode without BASE_PATH: use placeholder for post-build replacement
+	//   (post-build.js or Docker entrypoint will replace it with empty string)
+	const basePath =
+		env.BASE_PATH && env.BASE_PATH.trim() !== ""
+			? env.BASE_PATH
+			: mode === "development"
+				? ""
+				: "MEILI_UI_REPLACE_BASE_PATH";
+	if (env.BASE_PATH && env.BASE_PATH.trim() !== "") {
+		console.debug("Using custom base path:", env.BASE_PATH);
+	}
 	return {
-		base: env.BASE_PATH || "MEILI_UI_REPLACE_BASE_PATH",
+		base: basePath,
 		plugins: [
 			tsconfigPaths({ root: "./" }),
 			react(),
