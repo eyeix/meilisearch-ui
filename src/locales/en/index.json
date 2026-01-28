@@ -38,5 +38,6 @@
 		"tip": "The fuzzy search is done here via the /stats interface data, because Meilisearch does not provide a search interface for indexes"
 	},
 	"tasks_count": "{{count}} pending/processing task(s)",
-	"tasks_count_tooltip": "{{count}} incomplete task(s)"
+	"tasks_count_tooltip": "{{count}} incomplete task(s)",
+	"count_tooltip": "View documents"
 }

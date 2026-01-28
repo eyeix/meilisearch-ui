@@ -29,6 +29,7 @@ interface IndexItem {
 	numberOfDocuments: number;
 	isIndexing: boolean;
 	href: string;
+	documentsHref: string;
 }
 
 const fuse = new Fuse<IndexItem>([], {
@@ -50,6 +51,7 @@ export const IndexList: FC<Props> = ({ className = "", client }) => {
 			numberOfDocuments: index.numberOfDocuments,
 			isIndexing: index.isIndexing,
 			href: `/ins/${currentInstance.id}/index/${uid}`,
+			documentsHref: `/ins/${currentInstance.id}/index/${uid}/documents`,
 		}));
 	}, [stats?.indexes, currentInstance.id]);
 
@@ -134,13 +136,22 @@ export const IndexList: FC<Props> = ({ className = "", client }) => {
 									<CardBody className="space-y-1">
 										<div className="flex items-center justify-between gap-2">
 											<div className="flex gap-2 flex-1 min-w-0">
-												<Tag
-													size="small"
-													color="cyan"
-													className={"flex-shrink-0"}
-												>
-													{t("count")}: {item.numberOfDocuments ?? 0}
-												</Tag>
+												<Tooltip content={t("count_tooltip")}>
+													<Link
+														to={item.documentsHref}
+														className="no-underline"
+													>
+														<Tag
+															size="small"
+															color="cyan"
+															className={
+																"flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+															}
+														>
+															{t("count")}: {item.numberOfDocuments ?? 0}
+														</Tag>
+													</Link>
+												</Tooltip>
 												{item.isIndexing && (
 													<Tooltip content={t("indexing_tip")}>
 														<Tag

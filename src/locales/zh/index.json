@@ -38,5 +38,6 @@
 		"tip": "此处通过 /stats 接口数据进行模糊搜索，这是因为 Meilisearch 并未提供针对索引的搜索接口"
 	},
 	"tasks_count": "{{count}} 个待处理/处理中的任务",
-	"tasks_count_tooltip": "{{count}} 个未完成任务"
+	"tasks_count_tooltip": "{{count}} 个未完成任务",
+	"count_tooltip": "查看文档"
 }
