@@ -102,14 +102,16 @@ const Page = () => {
 					<Filter state={state} updateState={updateState} />
 					<TaskTotal total={total} />
 					<TaskList
+						client={client}
 						fetchNextPage={query.fetchNextPage}
 						instanceID={String(currentInstance?.id)}
 						list={list}
+						onRefresh={query.refetch}
 					/>
 				</main>
 			</div>
 		),
-		[currentInstance?.id, state, query, list, total],
+		[currentInstance?.id, state, query, list, total, client],
 	);
 };
 

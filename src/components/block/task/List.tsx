@@ -1,22 +1,53 @@
-import type { Task } from "meilisearch";
+import type { MeiliSearch, Task } from "meilisearch";
 import { getDuration, getDurationMs } from "@/utils/text";
 import { Modal, Table } from "@douyinfe/semi-ui";
 import type { ColumnProps } from "@douyinfe/semi-ui/lib/es/table";
 import { Button } from "@nextui-org/react";
-import { useMemo, type FC } from "react";
+import { useCallback, useMemo, type FC } from "react";
 import { useTranslation } from "react-i18next";
 import { TimeAgo } from "@/components/common/Timeago";
 import { CountUp } from "@/components/common/CountUp";
 import { JsonEditor } from "@/components/common/JsonEditor";
 import { Link } from "@tanstack/react-router";
 import { Loader } from "@/components/common/Loader";
+import { toast } from "@/lib/toast";
 
 export const TaskList: FC<{
+	client: MeiliSearch;
 	fetchNextPage: () => void;
 	instanceID: string;
 	list: Task[];
-}> = ({ fetchNextPage, instanceID, list }) => {
+	onRefresh?: () => void;
+}> = ({ client, fetchNextPage, instanceID, list, onRefresh }) => {
 	const { t } = useTranslation("task");
+
+	// Check if a task can be canceled
+	const isCancelable = useCallback((status: string) => {
+		return status === "enqueued" || status === "processing";
+	}, []);
+
+	// Handle task cancellation
+	const handleCancelTask = useCallback(
+		async (taskUid: number) => {
+			Modal.confirm({
+				title: t("cancel.confirm_title"),
+				content: t("cancel.confirm_content", { uid: taskUid }),
+				centered: true,
+				onOk: async () => {
+					try {
+						await client.cancelTasks({ uids: [taskUid] });
+						toast.success(t("cancel.success"));
+						onRefresh?.();
+					} catch (err) {
+						const errorMessage =
+							err instanceof Error ? err.message : String(err);
+						toast.error(t("cancel.error", { error: errorMessage }));
+					}
+				},
+			});
+		},
+		[client, onRefresh, t],
+	);
 
 	const columns: ColumnProps<Task>[] = useMemo(
 		() => [
@@ -126,7 +157,7 @@ export const TaskList: FC<{
 			{
 				title: t("actions"),
 				fixed: "right",
-				width: 150,
+				width: 200,
 				render: (_, record) => (
 					<div className="flex justify-center items-center gap-2">
 						<Button
@@ -154,11 +185,21 @@ export const TaskList: FC<{
 						>
 							{t("common:detail")}
 						</Button>
+						{isCancelable(record.status) && (
+							<Button
+								size="sm"
+								color="danger"
+								variant="flat"
+								onPress={() => handleCancelTask(record.uid)}
+							>
+								{t("cancel.button")}
+							</Button>
+						)}
 					</div>
 				),
 			},
 		],
-		[instanceID, t],
+		[instanceID, t, isCancelable, handleCancelTask],
 	);
 
 	return (

@@ -45,5 +45,14 @@
 		"title": "任务详情"
 	},
 	"total": "总计: {{count}}",
-	"empty": "未找到任务"
+	"empty": "未找到任务",
+	"cancel": {
+		"button": "取消",
+		"confirm_title": "取消任务",
+		"confirm_content": "确定要取消任务 #{{uid}} 吗？此操作无法撤销。",
+		"success": "任务取消请求已提交",
+		"error": "取消任务失败: {{error}}"
+	},
+	"actions": "操作",
+	"indexes": "索引"
 }
