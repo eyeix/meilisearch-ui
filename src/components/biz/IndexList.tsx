@@ -180,7 +180,7 @@ export const IndexList: FC<Props> = ({ className = "", client }) => {
 															: t("tasks")
 													}
 												>
-													<div className="relative">
+													<div className="relative flex items-center">
 														<Button
 															theme="light"
 															type="primary"
