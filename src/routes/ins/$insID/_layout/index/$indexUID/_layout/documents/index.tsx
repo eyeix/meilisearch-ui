@@ -40,6 +40,7 @@ export const Page = () => {
 		sort: "",
 		listType: "json",
 		showRankingScore: false,
+		rankingScoreThreshold: 0,
 		enableHybrid: false,
 		hybridEmbedder: "",
 		hybridSemanticRatio: 0.5,
@@ -107,6 +108,7 @@ export const Page = () => {
 				filter,
 				sort = "",
 				showRankingScore,
+				rankingScoreThreshold,
 				enableHybrid,
 				hybridEmbedder,
 				hybridSemanticRatio,
@@ -134,6 +136,8 @@ export const Page = () => {
 					filter,
 					sort: sortExpressions.map((v) => v.trim()),
 					showRankingScore,
+					rankingScoreThreshold:
+						rankingScoreThreshold > 0 ? rankingScoreThreshold : undefined,
 					hybrid: enableHybrid
 						? {
 								embedder: hybridEmbedder,

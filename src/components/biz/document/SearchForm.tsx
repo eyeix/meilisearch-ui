@@ -35,6 +35,7 @@ type Props = {
 		sort: string;
 		indexId?: string;
 		showRankingScore: boolean;
+		rankingScoreThreshold: number;
 		enableHybrid: boolean;
 		hybridEmbedder: string;
 		hybridSemanticRatio: number;
@@ -185,6 +186,27 @@ export const SearchForm = ({
 									{t("search.form.showRankingScore.label")}
 								</div>
 								<Switch {...searchForm.getInputProps("showRankingScore")} />
+							</div>
+						</Tooltip>
+						<Tooltip
+							position="bottom"
+							content={t("search.form.rankingScoreThreshold.tip")}
+						>
+							<div className="flex items-center gap-2">
+								<div className="text-sm">
+									{t("search.form.rankingScoreThreshold.label")}
+								</div>
+								<NumberInput
+									radius="md"
+									size="xs"
+									{...searchForm.getInputProps("rankingScoreThreshold")}
+									min={0}
+									max={1}
+									step={0.1}
+									decimalScale={2}
+									allowNegative={false}
+									w={70}
+								/>
 							</div>
 						</Tooltip>
 						<Tooltip

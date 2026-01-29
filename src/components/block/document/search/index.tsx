@@ -15,6 +15,7 @@ export const searchPageParamsSchema = z
 		sort: z.string(),
 		listType: z.enum(["json", "table", "grid"]),
 		showRankingScore: z.coerce.boolean(),
+		rankingScoreThreshold: z.number().min(0).max(1).default(0),
 		enableHybrid: z.boolean(),
 		hybridEmbedder: z.string(),
 		hybridSemanticRatio: z.number().min(0).max(1).default(0.5),
