@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.15.0](https://github.com/eyeix/meilisearch-ui/compare/v0.14.1...v0.15.0) (2026-01-29)
+
+
+### Features
+
+* add support for wildcard indexes when creating a new key (gh-259) ([9302df1](https://github.com/eyeix/meilisearch-ui/commit/9302df14f22ada628a1167b0b5cce6c154b5807a))
+* **document-search:** add ranking score threshold parameter for improved search results filtering with internationalization support. gh-255 ([ac32840](https://github.com/eyeix/meilisearch-ui/commit/ac328405f528f5eccd4c0c5cdf835b7ad456147d))
+* **index-list:** add task indicators and improve layout for better UX. gh-240 ([7a86751](https://github.com/eyeix/meilisearch-ui/commit/7a86751ef81bb9ef12ea594228d53e9cd3c79f7b))
+* **index-list:** make document count tag clickable to navigate directly to documents page. gh-253 ([77fd6e0](https://github.com/eyeix/meilisearch-ui/commit/77fd6e033854fdbfda6556c58443f5f4051db256))
+* **table-view:** implement sort arrows for sortable attributes and enhance user experience. gh-238 ([2c45dc7](https://github.com/eyeix/meilisearch-ui/commit/2c45dc77ec148b731920ae5e2ab588b064bb7e34))
+* **task-list:** add "Received Documents" column with internationalization support. gh-244 ([b1659a8](https://github.com/eyeix/meilisearch-ui/commit/b1659a8e796983db0e287ef82eed9008d6b07de4))
+* **task-list:** add task cancellation functionality with internationalization support. gh-254 ([91c96d5](https://github.com/eyeix/meilisearch-ui/commit/91c96d5768de84d7d5579d76cac0b31b6a5dae96))
+* **task-list:** add total task count display with internationalization support. gh-243 ([880b6af](https://github.com/eyeix/meilisearch-ui/commit/880b6afff8e275c61a196369e4b62ce99d118d14))
+
+
+### Bug Fixes
+
+* **date:** improve null date handling across components and utilities. gh-241 ([8c83025](https://github.com/eyeix/meilisearch-ui/commit/8c83025933811943ab7e274fb57a9d4460efa2cc))
+* **index-list:** update layout to include flexbox for better alignment of elements ([a851bf7](https://github.com/eyeix/meilisearch-ui/commit/a851bf7a77c7deac21b9c031e0584cdd82e36d34))
+* **task-list:** adjust column widths for better readability on moderate screens. gh-242 ([7741067](https://github.com/eyeix/meilisearch-ui/commit/7741067592a3c2870afd4185bceb866da1682934))
+
+
+### Performance Improvements
+
+* **vite:** enhance BASE_PATH handling for development ([04138bc](https://github.com/eyeix/meilisearch-ui/commit/04138bc9e70295db43f718a45319e78d77bcb6f4))
+
 ## [0.14.1](https://github.com/riccox/meilisearch-ui/compare/v0.14.0...v0.14.1) (2025-09-22)
 
 
