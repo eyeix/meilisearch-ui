@@ -270,3 +270,13 @@ pnpm dev
 - [Monaco Editor](https://microsoft.github.io/monaco-editor/) - Code editor
 - [Sonner](https://sonner.emilkowal.ski/) - Toast notifications
 - [Vaul](https://vaul.emilkowal.ski/) - Drawer component
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=eyeix%2Fmeilisearch-ui&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=eyeix/meilisearch-ui&type=date&theme=dark&legend=top-left&sealed_token=E7pYf4mdWA8WiH_TUr_tcxE6G_PwXVwmS0SHjhnkuR1iMeZz7O9xd5ewIkeQj4MJJSJtbjeIe-IbBIURJVpaM77mkbPGanXyD7aPUQeCM2T-wCgwM7x9tg" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=eyeix/meilisearch-ui&type=date&legend=top-left&sealed_token=E7pYf4mdWA8WiH_TUr_tcxE6G_PwXVwmS0SHjhnkuR1iMeZz7O9xd5ewIkeQj4MJJSJtbjeIe-IbBIURJVpaM77mkbPGanXyD7aPUQeCM2T-wCgwM7x9tg" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=eyeix/meilisearch-ui&type=date&legend=top-left&sealed_token=E7pYf4mdWA8WiH_TUr_tcxE6G_PwXVwmS0SHjhnkuR1iMeZz7O9xd5ewIkeQj4MJJSJtbjeIe-IbBIURJVpaM77mkbPGanXyD7aPUQeCM2T-wCgwM7x9tg" />
+ </picture>
+</a>
