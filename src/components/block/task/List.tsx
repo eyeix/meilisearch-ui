@@ -1,5 +1,6 @@
-import type { MeiliSearch, Task } from "meilisearch";
+import type { MeiliSearch } from "meilisearch";
 import { getDuration, getDurationMs } from "@/utils/text";
+import type { NormalizedTask } from "@/utils/task";
 import { Modal, Table } from "@douyinfe/semi-ui";
 import type { ColumnProps } from "@douyinfe/semi-ui/lib/es/table";
 import { Button } from "@nextui-org/react";
@@ -16,7 +17,7 @@ export const TaskList: FC<{
 	client: MeiliSearch;
 	fetchNextPage: () => void;
 	instanceID: string;
-	list: Task[];
+	list: NormalizedTask[];
 	onRefresh?: () => void;
 }> = ({ client, fetchNextPage, instanceID, list, onRefresh }) => {
 	const { t } = useTranslation("task");
@@ -49,7 +50,7 @@ export const TaskList: FC<{
 		[client, onRefresh, t],
 	);
 
-	const columns: ColumnProps<Task>[] = useMemo(
+	const columns: ColumnProps<NormalizedTask>[] = useMemo(
 		() => [
 			{
 				title: "UID",

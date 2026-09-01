@@ -1,10 +1,11 @@
-import { LoaderPage } from "@/components/common/Loader";
 import { Filter } from "@/components/block/task/Filter";
 import { TaskList } from "@/components/block/task/List";
 import { TaskTotal } from "@/components/block/task/Total";
+import { LoaderPage } from "@/components/common/Loader";
 import { useCurrentInstance } from "@/hooks/useCurrentInstance";
 import { useMeiliClient } from "@/hooks/useMeiliClient";
 import { hiddenRequestLoader, showRequestLoader } from "@/lib/loader";
+import { normalizeTask } from "@/utils/task";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import _ from "lodash";
@@ -56,11 +57,15 @@ const Page = () => {
 		}: { pageParam: { limit: number; from?: number } }) => {
 			showRequestLoader();
 			console.debug("getTasks", client.config, state);
-			return await client.getTasks({
+			const tasks = await client.getTasks({
 				..._.omitBy(state, _.isEmpty),
 				from: pageParam.from,
 				limit: pageParam.limit,
 			});
+			return {
+				...tasks,
+				results: tasks.results.map((task) => normalizeTask(task)),
+			};
 		},
 		initialPageParam: {
 			limit: state.limit,

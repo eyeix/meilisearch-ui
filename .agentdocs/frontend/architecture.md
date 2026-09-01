@@ -73,5 +73,6 @@ Meilisearch-UI 是纯前端 SPA，用于管理 Meilisearch 实例。修改任何
 ## 跨文件行为约定
 
 - **日期显示**：所有日期字段为 null / undefined / 无效值时必须显示占位符（如 `-`），严禁显示 `1970-01-01` 等 epoch 默认值。适用于任务元数据（`enqueuedAt` / `startedAt` / `finishedAt`）、文档字段及 `TimeAgo`、`CountUp` 等时间组件。
+- **任务时间戳归一化**：meilisearch SDK（≤ 0.49.0）的 `Task` 构造函数对可空时间戳无条件执行 `new Date()`，服务端返回的 `null`（未完成任务的 `finishedAt` / `startedAt`）会被转成 epoch `1970-01-01`。消费任务数据必须先经过 `normalizeTask`（`src/utils/task.ts`），不要绕过它直接使用 `client.getTasks()` 的原始结果；类型使用 `NormalizedTask`（时间戳可空）。SDK 0.60.0 起已修复，升级后可移除此约定。
 - **项目元数据一致性**：作者（eyeix）、仓库地址、Docker 镜像名（eyeix 的 Docker Hub 命名空间）、演示地址（Vercel 部署）在 `package.json`、README（中英双语）、`LICENSE`、源码中必须保持一致，修改任一处需全局同步。
 - **i18n**：新增用户可见文案必须同时补充 `src/locales/en/` 与 `src/locales/zh/` 对应命名空间的翻译。
