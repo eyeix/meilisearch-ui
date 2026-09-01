@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Github__pull_request_read"
+    ]
+  }
+}
