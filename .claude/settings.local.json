@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "mcp__Github__issue_read"
-    ]
-  }
-}
