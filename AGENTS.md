@@ -1,18 +1,11 @@
-<!-- OPENSPEC:START -->
-# OpenSpec Instructions
+# AGENTS.md
 
-These instructions are for AI assistants working in this project.
+## 验证要求
 
-Always open `@/openspec/AGENTS.md` when the request:
-- Mentions planning or proposals (words like proposal, spec, change, plan)
-- Introduces new capabilities, breaking changes, architecture shifts, or big performance/security work
-- Sounds ambiguous and you need the authoritative spec before coding
+- 提交前必须通过 `pnpm lint`（Biome）检查。
+- 变更 TypeScript 代码后必须通过 `pnpm build:safe`（tsc + vite build）验证类型与构建。
+- 项目未配置测试框架，不要求运行测试；如引入测试框架，须先补充测试要求至本文档。
 
-Use `@/openspec/AGENTS.md` to learn:
-- How to create and apply change proposals
-- Spec format and conventions
-- Project structure and guidelines
+## 必读文档
 
-Keep this managed block so 'openspec update' can refresh the instructions.
-
-<!-- OPENSPEC:END -->
+- 修改任何前端代码前，先阅读 `.agentdocs/frontend/architecture.md`。

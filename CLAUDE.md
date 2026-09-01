@@ -51,7 +51,6 @@ common, dashboard, task, key, upload, document, index, instance, header, sys
 
 ## Coding Standards
 
-From `.cursorrules`:
 - Code comments in English
 - Git commits in English, follow Conventional Commits (`feat(module): description`)
 - File names: lowercase with hyphens, except TSX components use PascalCase
