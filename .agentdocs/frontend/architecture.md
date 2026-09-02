@@ -66,6 +66,8 @@ Meilisearch-UI 是纯前端 SPA，用于管理 Meilisearch 实例。修改任何
 - 未完全响应式，主要面向桌面端使用。
 - Meilisearch 实例必须配置 CORS 允许 UI 域名访问，否则浏览器直连请求会被拦截。
 - 单例模式下 API Key 会打进前端 bundle，仅限可信内网环境使用。
+- 单例模式的 `SINGLETON_HOST` 必须是浏览器可达地址：容器内部主机名（如 `http://meilisearch:7700`）浏览器无法解析，只对构建容器本身有意义（gh-267）。环境变量在构建时经 `scripts/cmd.sh` 转换为 `VITE_SINGLETON_*` 写入 bundle。
+- 单例模式报错文案需区分两种场景：host 缺失用 `singleton_cfg_not_found`；host 存在但连接失败用 `singleton_connection_error`（带 host 插值），见 `src/hooks/useMeiliClient.ts`。
 - API Key 存于 localStorage，对 JS 可见，需注意 XSS 暴露风险。
 - 部署形态：`BASE_PATH` 支持子路径部署；Docker 提供 full / lite 两种镜像（lite 不含单例模式）；另支持 Vercel、Netlify。开发与预览端口 24900。
 - 浏览器兼容要求：ES2020+、LocalStorage、Fetch API。

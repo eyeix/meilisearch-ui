@@ -129,6 +129,17 @@ docker run -d --restart=on-failure:5 \
   eyeix/meilisearch-ui:latest
 ```
 
+The supported environment variables are `SINGLETON_MODE`, `SINGLETON_HOST` and `SINGLETON_API_KEY` — the singleton instance has no configurable index or id.
+
+> [!IMPORTANT]
+>
+> **SINGLETON_HOST must be reachable from your browser**
+>
+> This app is a pure client-side SPA: the environment variables are only baked into the static bundle at build time, and all requests go directly from the browser to your meilisearch instance. Therefore:
+>
+> - Do NOT use docker-internal hostnames (e.g. `http://meilisearch:7700`) unless your browser can resolve them; use a host-reachable address instead (e.g. `http://<server-ip>:7700` or a reverse-proxied domain).
+> - Your meilisearch instance must allow CORS for this UI origin, and `SINGLETON_API_KEY` must be a valid key.
+
 > [!CAUTION]
 >
 > **Security Note**

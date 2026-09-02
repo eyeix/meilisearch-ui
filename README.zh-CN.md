@@ -128,6 +128,17 @@ docker run -d --restart=on-failure:5 \
   eyeix/meilisearch-ui:latest
 ```
 
+受支持的环境变量只有 `SINGLETON_MODE`、`SINGLETON_HOST` 和 `SINGLETON_API_KEY`，单例实例没有可配置的索引或编号。
+
+> [!IMPORTANT]
+>
+> **SINGLETON_HOST 必须能被浏览器访问**
+>
+> 本应用是纯客户端 SPA：环境变量只在构建时写入静态资源，所有请求都由浏览器直连 Meilisearch 实例。因此：
+>
+> - 不要使用容器内部主机名（如 `http://meilisearch:7700`），除非你的浏览器能解析它；请使用宿主机可达的地址（如 `http://<服务器IP>:7700` 或反向代理域名）。
+> - Meilisearch 实例必须允许本 UI 域名的跨域访问（CORS），且 `SINGLETON_API_KEY` 必须是有效的密钥。
+
 > [!CAUTION]
 >
 > **安全提示**
