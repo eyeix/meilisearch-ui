@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.3](https://github.com/eyeix/meilisearch-ui/compare/v0.15.2...v0.15.3) (2026-09-02)
+
+
+### Bug Fixes
+
+* **docker:** pin pnpm major version and approve dependency build scripts ([889955f](https://github.com/eyeix/meilisearch-ui/commit/889955f6d80394527212ad4d99174e8d692a15b2))
+
 ## [0.15.2](https://github.com/eyeix/meilisearch-ui/compare/v0.15.1...v0.15.2) (2026-09-02)
 
 
