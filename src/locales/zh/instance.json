@@ -33,6 +33,7 @@
 	},
 	"no_master_key_error": "Meilisearch 正在没有设置主密钥的情况下运行。\n若要访问此API端点，您必须在启动时设置主密钥。",
 	"singleton_cfg_not_found": "检测到单例模式连接失败！\n正在没有有效实例配置的情况下运行，您必须在启动之前设置正确的实例环境配置",
+	"singleton_connection_error": "检测到单例模式！连接 {{host}} 失败！\n主机地址必须能被你的浏览器访问：容器内部主机名（如 http://meilisearch:7700）只在容器网络内有效。另请检查 Meilisearch 实例的跨域配置与 API 密钥。",
 	"not_found": "未找到实例",
 	"form": {
 		"title": {

@@ -45,7 +45,14 @@ export const useMeiliClient = () => {
 				// do not use useNavigate, because maybe in first render
 				window.location.assign(import.meta.env.BASE_URL ?? "/");
 			} else {
-				setWarningPageData({ prompt: t("instance:singleton_cfg_not_found") });
+				// config exists but connection failed: the host is unreachable from the
+				// browser (docker-internal hostname, CORS, wrong api key...), show it
+				// instead of misleading "config not set" message. gh-267
+				setWarningPageData({
+					prompt: t("instance:singleton_connection_error", {
+						host: currentInstance?.host,
+					}),
+				});
 				// do not use useNavigate, because maybe in first render
 				const baseUrl = (import.meta.env.BASE_URL ?? "").replace(/\/$/, "");
 				window.location.assign(`${baseUrl}/warning`);
