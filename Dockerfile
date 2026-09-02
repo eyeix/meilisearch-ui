@@ -3,7 +3,8 @@ FROM node:22
 # Setting working directory.
 WORKDIR /opt/meilisearch-ui
 
-RUN npm install -g pnpm
+# Pin pnpm major version to keep docker builds reproducible
+RUN npm install -g pnpm@10
 
 # Copying source files
 COPY . .
