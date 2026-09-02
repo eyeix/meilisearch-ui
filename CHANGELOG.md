@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.15.2](https://github.com/eyeix/meilisearch-ui/compare/v0.15.1...v0.15.2) (2026-09-02)
+
+
+### Bug Fixes
+
+* **singleton:** show host-specific error when singleton connection fails ([78d6e00](https://github.com/eyeix/meilisearch-ui/commit/78d6e00872eadee4646d95fae6a11d30ecd83eda))
+* **task:** keep finishedAt/startedAt null for unfinished tasks ([b162b8b](https://github.com/eyeix/meilisearch-ui/commit/b162b8bf8fc7cf8b0c736de6066da6e1239f9068)), closes [#264](https://github.com/eyeix/meilisearch-ui/issues/264)
+* **upload:** reject error responses before showing task notification ([e58f3fe](https://github.com/eyeix/meilisearch-ui/commit/e58f3fe33ad2590eb20967bbd2f9ef77dd6e818f)), closes [#266](https://github.com/eyeix/meilisearch-ui/issues/266)
+
 ## [0.15.1](https://github.com/eyeix/meilisearch-ui/compare/v0.15.0...v0.15.1) (2026-02-04)
 
 
