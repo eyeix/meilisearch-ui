@@ -84,7 +84,8 @@ export const TaskThemes: Record<TaskStatus, string> = {
 
 // show task submit notification
 export const showTaskSubmitNotification = (task: EnqueuedTask): void => {
-	TaskStatusToast[task.status](getTaskSubmitMessage(task));
+	// Fall back to info for unknown statuses so unexpected payloads never crash callers
+	(TaskStatusToast[task.status] ?? toast.info)(getTaskSubmitMessage(task));
 };
 
 // show task error notification

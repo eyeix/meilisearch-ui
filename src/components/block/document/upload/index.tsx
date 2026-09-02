@@ -45,8 +45,16 @@ export const UploadDoc = () => {
 				},
 				body: variables,
 			});
-			const task = (await response.json()) as EnqueuedTask;
-			console.debug("addDocumentsMutation", "response", task);
+			const body = await response.json();
+			console.debug("addDocumentsMutation", "response", body);
+			// Reject non-task payloads (e.g. Meilisearch error objects) so they
+			// never reach the success path, which expects a valid task status.
+			if (!response.ok || typeof body?.status !== "string") {
+				throw new Error(
+					body?.message ?? `Unexpected response ${response.status}`,
+				);
+			}
+			const task = body as EnqueuedTask;
 			return task;
 		},
 
