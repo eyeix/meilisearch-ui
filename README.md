@@ -74,6 +74,12 @@ docker pull eyeix/meilisearch-ui:latest
 docker run -d --restart=on-failure:5 --name="meilisearch-ui" -p <your-port>:24900 eyeix/meilisearch-ui:latest
 ```
 
+The main image ships a **prebuilt** Vite bundle. At container start the
+entrypoint substitutes runtime config (`BASE_PATH`, `SINGLETON_*`) into
+`dist/` and serves immediately — typically seconds, not a full rebuild.
+Optional override: set `DIST_DIR` if the prebuilt assets live somewhere
+other than `/opt/meilisearch-ui/dist`.
+
 #### Lightweight mirror image
 
 Due to functions such as adapting custom paths, the main image size will become a burden for some users. If you only need to use the basic functionality of the application, you can use the `lite` variant image, which contains only the necessary constructs and is very small compared to the main image.

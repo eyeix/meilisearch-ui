@@ -1,7 +1,11 @@
 node_modules
 npm-debug.log
 build
+dist
 .dockerignore
+.env
+.env.*
+.git
 **/.github
 **/.DS_Store
 **/node_modules
