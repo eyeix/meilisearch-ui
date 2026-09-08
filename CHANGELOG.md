@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.4](https://github.com/eyeix/meilisearch-ui/compare/v0.15.3...v0.15.4) (2026-09-08)
+
+
+### Bug Fixes
+
+* **docker:** skip post-build.js in lite image so BASE_PATH placeholders survive ([#273](https://github.com/eyeix/meilisearch-ui/issues/273)) ([ed8a2da](https://github.com/eyeix/meilisearch-ui/commit/ed8a2da42e1209d43e5b190e74617bb5360ce6ad))
+
 ## [0.15.3](https://github.com/eyeix/meilisearch-ui/compare/v0.15.2...v0.15.3) (2026-09-02)
 
 
