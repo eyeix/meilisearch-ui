@@ -12,8 +12,12 @@ COPY . .
 # Installing dependencies
 RUN pnpm install
 
-# Build the app
-RUN npm run build
+# Build the app. `build:docker` runs plain `vite build` and skips
+# scripts/post-build.js, which would blank the MEILI_UI_REPLACE_BASE_PATH
+# placeholders at build time — they must survive until the runtime
+# entrypoint (docker-entrypoint.d/30-basepath-subst.sh) substitutes
+# BASE_PATH at container start.
+RUN pnpm run build:docker
 
 # -------
 FROM nginx:stable-alpine AS final
